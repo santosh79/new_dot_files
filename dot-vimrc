@@ -1,0 +1,220 @@
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'gmarik/vundle'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'jimenezrick/vimerl'
+Plugin 'junegunn/vim-easy-align'
+Plugin 'elixir-lang/vim-elixir'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'guns/vim-clojure-static'
+Plugin 'digitaltoad/vim-jade'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'scrooloose/syntastic'
+Plugin 'kennethzfeng/vim-raml'
+Plugin 'tpope/vim-fireplace'
+Plugin 'fatih/vim-go'
+Bundle 'mattn/webapi-vim'
+Bundle 'mattn/gist-vim'
+" Plugin 'Valloric/YouCompleteMe'
+" Plugin 'tpope/vim-foreplay'
+" Plugin 'tpope/vim-git'
+" Plugin 'derekwyatt/vim-scala'
+" Plugin 'tpope/vim-rails'
+" Plugin 'tpope/vim-surround'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" " To ignore plugin indent changes, instead use:
+" "filetype plugin on
+" "
+" " Brief help
+" " :PluginList       - lists configured plugins
+" " :PluginInstall    - installs plugins; append `!` to update or just
+" :PluginUpdate
+" " :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" " :PluginClean      - confirms removal of unused plugins; append `!` to
+" auto-approve removal
+" "
+" " see :h vundle for more details or wiki for FAQ
+" " Put your non-Plugin stuff after this line
+" ================
+" Ruby stuff
+" ================
+syntax on                 " Enable syntax highlighting
+filetype plugin indent on " Enable filetype-specific indenting and plugins
+
+augroup myfiletypes
+  " Clear old autocmds in group
+  autocmd!
+  " autoindent with two spaces, always expand tabs
+  autocmd FileType ruby,eruby,yaml set ai sw=2 sts=2 et
+augroup END
+" ================
+
+
+" Needed on some linux distros.
+" " see
+" http://www.adamlowe.me/2009/12/vim-destroys-all-other-rails-editors.html
+filetype off
+
+let mapleader = "\<Space>"
+
+vmap <Leader>b :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
+map <Leader>gp :!git push<CR>
+map <Leader>co :TComment<CR>
+map <Leader>gs :Gstatus<CR>
+map <Leader>gd :Gvdiff<CR>
+map <Leader>on :on<CR>
+map <Leader>gr :Gread<CR>
+map <Leader>gw :Gwrite<CR>
+map <Leader>l <C-w><C-w>
+map <Leader>a 0w
+map <Leader>p :set paste<CR>i
+map <Leader>vi :tabe ~/.vimrc<CR>
+map <Leader>wq <esc>:wq<CR>
+map <Leader>ce :!erl -compile %<CR>
+map <Leader>ru :!elixir %<CR>
+map <Leader>di :!dialyzer %<CR>
+map <Leader>q <esc>:q<CR>
+map <Leader>a ea
+map <Leader>rt :Eval (clojure.test/run-tests)<CR>
+map <Leader>r :Require!<CR>
+" Edit another file in the same directory as the current file
+" uses expression to extract path from current file's path
+map <Leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
+map <Leader>w :w <CR>
+map <Leader>v V
+map <Leader>n tn
+map <Leader>vn :vnew <C-R>=expand("%:p:h") . '/'<CR>
+map <Leader>s :split <C-R>=expand("%:p:h") . '/'<CR>
+map <Leader>t :tabnew <C-R>=expand("%:p:h") . '/'<CR>
+nnoremap <Leader>p :CtrlP<CR>
+nnoremap <Leader>o O
+nnoremap <Leader>c C
+
+nnoremap Q <nop>
+
+map <C-h> :nohl<CR>
+map ; :!
+imap <Leader>n <C-n>
+imap <C-l> <Space>=><Space>
+map <C-t> <esc>:tabnew<CR>
+map <C-x> <C-w>c
+map <C-p> :cp<CR>
+
+
+set nocompatible
+set backspace=indent,eol,start " allow backspacing over everything in insert mode
+set history=500		" keep 500 lines of command line history
+set ruler		" show the cursor position all the time
+set showcmd		" display incomplete commands
+set autoindent
+set showmatch
+set wrap
+set autoread
+set wmh=0
+set viminfo+=!
+set guioptions-=T
+set guifont=Triskweline_10:h10
+set et
+set sw=2
+set smarttab
+set noincsearch
+set ignorecase smartcase
+set laststatus=2  " Always show status line.
+set number
+set autoindent " always set autoindenting on
+set nobackup
+set noswapfile
+noremap j gj
+noremap k gk
+noremap tn gt
+noremap ' @q
+noremap 1 $
+noremap \ ?
+noremap tp gT
+noremap * /<C-R>=expand('<cword>')<CR>\><CR>
+inoremap kj <Esc>
+inoremap clg console.log(
+" JS shortcuts
+inoremap frs function(err, res) {<CR>});<Esc>
+inoremap fdd function(done) {<CR>});<Esc>
+inoremap rtd return done();<Esc>
+inoremap ife if(err) return cb(err);
+inoremap ifn if(err) return next(err);
+inoremap ifd if(err) return done(err);
+inoremap prd path.resolve(__dirname,
+" elixir shortcuts
+inoremap rcd receive do<CR>end
+inoremap iof io:format("
+inoremap iop IO.puts "
+inoremap jss JSON.stringify(
+inoremap prf printf ("
+inoremap scf scanf ("
+inoremap tss toString()
+inoremap hq handleQuery(function(rows) {
+inoremap date<Tab> <C-R>=strftime("%Y-%m-%d")<CR>
+
+set mouse=in
+
+" Make the omnicomplete text readable
+:highlight PmenuSel ctermfg=black
+
+" Fuzzy finder: ignore stuff that can't be opened, and generated files
+let g:fuzzy_ignore = "*.png;*.PNG;*.JPG;*.jpg;*.GIF;*.gif;vendor/**;coverage/**;tmp/**;rdoc/**"
+
+" Highlight the status line
+highlight StatusLine ctermfg=blue ctermbg=yellow
+set statusline=%F\ %m%r%w%y\ %=(%L\ loc)\ [#\%03.3b\ 0x\%02.2B]\ \ %l,%v\ \ %P
+
+" Format xml files
+au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null" 
+
+" set foldmethod=syntax
+" set foldlevel=1
+" set foldenable
+
+vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
+
+command Q q
+command W w
+command Qall qall
+
+highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+match ExtraWhitespace /\s\+$/
+
+
+"
+" ========================================================================
+" End of things set by me.
+" ========================================================================
+
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+if &t_Co > 2 || has("gui_running")
+  syntax on
+  set hlsearch
+endif
+
+
+
+
+noremap ! :Shell git grep -n <C-R>=expand('<cword>')<CR>
+
+set exrc
+set secure
+let g:ctrlp_custom_ignore = 'deps\|node_modules\|DS_Store\|git'
+let g:gist_clip_command = 'xclip -selection clipboard'
+
+set t_Co=256
+colorscheme adam
+highlight Normal ctermbg=NONE
+highlight nonText ctermbg=NONE
+
+
+au BufRead,BufNewFile *.handlebars,*.hbs set ft=html syntax=handlebars

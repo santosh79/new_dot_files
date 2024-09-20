@@ -1,0 +1,28 @@
+[user]
+  name = Santosh Kumar
+  email = santosh79@gmail.com
+[color]
+  diff = auto
+  status = auto
+  pager = true
+  interactive = auto
+  branch = auto
+[alias]
+  st = status
+  sts = status -s
+  co = checkout
+  br = branch
+  f = fetch
+  c = commit -m
+  ca = commit -am
+  wd = diff --word-diff
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+  me = log --author=Santosh --since='1 week' --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+[core]
+  editor = vim
+  whitespace = trailing-space,space-before-tab,indent-with-non-tab,cr-at-eol
+  excludesfiles = ~/.gitignore
+[push]
+  default = simple
+[github]
+  user = santosh79

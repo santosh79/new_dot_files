@@ -1,0 +1,106 @@
+eval "$(/opt/homebrew/bin/brew shellenv)"
+alias gst="git status"
+alias gad="git add "
+alias gdc="git diff --cached"
+alias gc="git commit "
+alias gp="git push "
+alias gcp="git cherry-pick "
+alias gbr="git branch -a "
+alias glg="git lg "
+alias gd="git diff --word-diff "
+alias gwd="git diff --word-diff "
+alias gcv="git commit -v"
+alias gco="git checkout "
+alias lp="ls -p"
+alias lrt="ls -lrt"
+alias la="ls -al"
+
+alias lr='LEIN_ROOT=1 lein repl'
+
+alias tl='tmux ls'
+alias ta='tmux at -t'
+
+alias v='vim '
+
+export CLICOLOR=1
+export LS_COLORS exfxcxdxbxegebabagacad
+export TERM=xterm-256color
+
+RED="\[\033[0;31m\]"
+YELLOW="\[\033[0;33m\]"
+GREEN="\[\033[0;32m\]"
+NO_COLOR="\[\033[0m\]"
+
+alias tn='tmux new -s'
+alias tr='tmux-session restore'
+alias ts='tmux-session save'
+
+alias mt='mix test'
+alias mb='MIX_ENV=prod mix release'
+# alias mt='dc exec -it remixdb:0.1 mix test --exclude skip'
+alias mtc='mix test --only current'
+alias mts='mix test --only skip'
+alias im='iex -S mix run --no-start'
+
+
+export PATH="/usr/local/bin:/usr/bin:$PATH"
+export PATH="$HOME/bin:/usr/local/bin:$PATH"
+export PATH=$HOME/bin:$PATH
+
+# DOCKER stuff
+# Container stuff
+alias dcls='docker container ls -a'
+alias dc='docker container '
+alias dcs='docker container start -i '
+alias dp='docker container run --publish '
+alias dcit='docker container run --rm -it -v $(pwd):/app '
+alias dcgo='docker container run --rm -it -v $(pwd):/go '
+alias dcrn='docker container run --name '
+alias dcrm='docker container run --rm '
+alias dsh='docker container exec -it '
+
+# Docker Image
+alias di='docker image '
+alias dimg='docker image ls '
+
+# Docker Network
+alias dn='docker network '
+alias dnls='docker network ls'
+alias dni='docker network inspect '
+
+# Docker Volume
+alias dv='docker volume '
+
+
+# create a network
+alias dncr='docker network create --driver '
+
+# attach/detach a container to a network
+alias dncon='docker network connect '
+alias ddcon='docker network disconnect '
+alias dev='docker container run -it --name dev -p 8080:8080 --net dev_net -v $HOME/codez:/app santoshdocker2021/dev sh'
+alias dev_sh='dc exec -it dev sh'
+# alias db='dc run -e POSTGRES_PASSWORD=postgres --net dapper_net --name db -d postgres:alpine'
+alias db='dc run -e POSTGRES_PASSWORD=postgres --name db -p 5432:5432 -d postgres:alpine'
+alias dpsql='dc exec -it db psql -U postgres'
+alias dlr='docker container run -it -v $(pwd):/app --rm clojure:latest lein repl'
+alias dirb='docker container run -it -v $(pwd):/app --rm ruby:3.0-alpine irb'
+alias dpy='docker container run -it -v $(pwd):/app --rm python:alpine python'
+alias diex='docker container run -it -v $(pwd):/app --rm elixir:1.12-alpine iex'
+alias dnode='docker container run -it --rm node:15.13.0-alpine3.10 node'
+alias redis="docker container run -d -p 6379:6379 --rm --name redis redis:6.2.1-alpine"
+alias redis_stop="docker container stop redis"
+
+
+
+# building docker from Dockerfile
+alias dbt='docker image build -t '
+# Example: `dbt <some_tag> .` -- builds into current dir
+# where Dockerfile is located
+
+alias pg='ps aux | grep '
+
+export LDFLAGS="-L/opt/homebrew/opt/openssl@1.1/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/openssl@1.1/include"
+
+alias ibrew="arch -x86_64 /usr/local/bin/brew"
